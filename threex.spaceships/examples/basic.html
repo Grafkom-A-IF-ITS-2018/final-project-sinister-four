@@ -41,6 +41,15 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		comment								//
 	//////////////////////////////////////////////////////////////////////////////////
+
+	var texture	= THREE.ImageUtils.loadTexture('../images/galaxy_starfield.png')
+	var material	= new THREE.MeshBasicMaterial({
+		map	: texture,
+		side	: THREE.BackSide
+	})
+	var geometry	= new THREE.SphereGeometry(100, 32, 32)
+	var mesh	= new THREE.Mesh(geometry, material)
+	scene.add(mesh)
 	
 	THREEx.SpaceShips.loadSpaceFighter01(function(object3d){
 		object3d.position.x	= -1
