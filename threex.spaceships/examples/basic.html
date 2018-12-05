@@ -2,11 +2,15 @@
 <script src='vendor/three.js/build/three.js'></script>
 <script src='vendor/three.js/examples/js/loaders/OBJLoader.js'></script>
 <script src='vendor/three.js/examples/js/loaders/MTLLoader.js'></script>
-<script src='/../threex.spaceships.js'></script>
+<script src='../threex.spaceships.js'></script>
+<script src="../lib/WebVR.js"></script>
 <body style='margin: 0px; background-color: #555555; overflow: hidden;'><script>
 	var renderer	= new THREE.WebGLRenderer();
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
+	document.body.appendChild( WEBVR.createButton( renderer ) );
+
+	renderer.vr.enabled = true;
 
 	var onRenderFcts= [];
 	var scene	= new THREE.Scene();
