@@ -8,11 +8,11 @@
 <body style='margin: 0px; background-color: #ec1010; overflow: hidden;'><script>
 
     var renderer	= new THREE.WebGLRenderer();
-    renderer.setPixelRatio(window.devicePixelRatio);
+    //renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.vr.enabled = true
+    //renderer.vr.enabled = true
 	document.body.appendChild( renderer.domElement );
-	document.body.appendChild( WEBVR.createButton( renderer ) );
+	//document.body.appendChild( WEBVR.createButton( renderer ) );
 	//console.log(renderer.vr.enabled);
 	var onRenderFcts= [];
 	var scene	= new THREE.Scene();
@@ -57,38 +57,38 @@
 	var mesh	= new THREE.Mesh(geometry, material)
 	scene.add(mesh)
 	
-	THREEx.SpaceShips.loadSpaceFighter01(function(object3d){
+	/*THREEx.SpaceShips.loadSpaceFighter01(function(object3d){
 		object3d.position.x	= -1
 		object3d.position.y	=  0.5
 		scene.add(object3d)
-	})
+	})*/
 
-	THREEx.SpaceShips.loadSpaceFighter02(function(object3d){
+	/*THREEx.SpaceShips.loadSpaceFighter02(function(object3d){
 		object3d.position.x	= 1
 		object3d.position.y	= 0.5
 		scene.add(object3d)
-	})
+	})*/
 
 	THREEx.SpaceShips.loadSpaceFighter03(function(object3d){
-		var spaceship	= object3d
+        var spaceship	= object3d
 		scene.add(spaceship)
 	
-		var shoot	= new THREEx.SpaceShips.Shoot()
+		var shoot	= new THREEx.SpaceShips.Shoot() // Shoot Left
 		shoot.position.x= 0.5
 		shoot.position.z= 0.3
 		scene.add(shoot)
 		
-		var shoot	= new THREEx.SpaceShips.Shoot()
+		var shoot	= new THREEx.SpaceShips.Shoot() // Shoot Right
 		shoot.position.x=-0.5
 		shoot.position.z= 0.3
 		scene.add(shoot)
 		
-		var detonation	= new THREEx.SpaceShips.Detonation()
+		var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Left
 		detonation.position.x= 0.5
 		detonation.position.z= 0.1
 		scene.add(detonation)
 		
-		var detonation	= new THREEx.SpaceShips.Detonation()
+		var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Right
 		detonation.position.x=-0.5
 		detonation.position.z= 0.1
 		scene.add(detonation)
@@ -100,23 +100,23 @@
 		scene.add(light)
 	})
 	
-	THREEx.SpaceShips.loadShuttle01(function(object3d){
+	/*THREEx.SpaceShips.loadShuttle01(function(object3d){
 		object3d.position.x	= -1
 		object3d.position.y	= -0.5
 		scene.add(object3d)
-	})
+	})*/
 		
-	THREEx.SpaceShips.loadShuttle02(function(object3d){
+	/*THREEx.SpaceShips.loadShuttle02(function(object3d){
 		object3d.position.x	=  1
 		object3d.position.y	= -0.5
 		scene.add(object3d)
-	})
+	})*/
 
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Camera Controls							//
 	//////////////////////////////////////////////////////////////////////////////////
-	var mouse	= {x : 0, y : 0}
+	/*var mouse	= {x : 0, y : 0}
 	document.addEventListener('mousemove', function(event){
 		mouse.x	= (event.clientX / window.innerWidth ) - 0.5
 		mouse.y	= (event.clientY / window.innerHeight) - 0.5
@@ -125,7 +125,7 @@
 		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
 		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
 		camera.lookAt( scene.position )
-	})
+	})*/
 
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -154,7 +154,7 @@
 		})
 		renderer.render( scene, camera );	
 	})
-	renderer.setAnimationLoop(requestanimationFrame.animate);
+	//renderer.setAnimationLoop(requestanimationFrame.animate);
 </script>
 </body>
 
