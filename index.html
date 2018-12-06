@@ -3,20 +3,21 @@
 <script src='lib/three.js'></script>
 <script src='lib/OBJLoader.js'></script>
 <script src='lib/MTLLoader.js'></script>
-<script src='lib/threex.spaceships.js'></script>
+<script src='threex.spaceships.js'></script>
 <script src="lib/WebVR.js"></script>
 <body style='margin: 0px; background-color: #ec1010; overflow: hidden;'><script>
 
-	var renderer	= new THREE.WebGLRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight );
+    var renderer	= new THREE.WebGLRenderer();
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.vr.enabled = true
 	document.body.appendChild( renderer.domElement );
 	document.body.appendChild( WEBVR.createButton( renderer ) );
-	renderer.vr.enabled = true
 	//console.log(renderer.vr.enabled);
 	var onRenderFcts= [];
 	var scene	= new THREE.Scene();
 	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
-	camera.position.z = -2;	
+	camera.position.z = 2;	
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		set 3 point lighting						//
@@ -47,7 +48,7 @@
 	//		comment								//
 	//////////////////////////////////////////////////////////////////////////////////
 
-	var texture	= THREE.ImageUtils.loadTexture('../images/galaxy_starfield.png')
+	var texture	= THREE.ImageUtils.loadTexture('assets/galaxy_starfield.png')
 	var material	= new THREE.MeshBasicMaterial({
 		map	: texture,
 		side	: THREE.BackSide

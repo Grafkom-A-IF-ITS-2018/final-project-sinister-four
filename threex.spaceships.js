@@ -179,7 +179,7 @@ THREEx.SpaceShips.Shoot	= function(){
  */
 THREEx.SpaceShips.Detonation	= function(){
 	var baseUrl	= THREEx.SpaceShips.baseUrl 
-	var url		= baseUrl + 'images/lensflare0_alpha.png';
+	var url		= baseUrl + 'assets/lensflare0_alpha.png';
 	var texture	= THREE.ImageUtils.loadTexture(url);
 	// do the material	
 	var geometry	= new THREE.PlaneGeometry(1,1)
