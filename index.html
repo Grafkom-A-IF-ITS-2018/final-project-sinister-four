@@ -116,13 +116,6 @@
 		}else if( keyboard.pressed('up') ){
 		    player.position.y  += speed * delta;
 		}
-<<<<<<< HEAD
-		moonMesh.position.z += -2 * delta;
-		if( moonMesh.position.z < -3 )  resetMoon()
-		shootleft.position.z += shootSpeed * delta;
-		shootright.position.z += shootSpeed * delta;
-		if( shootleft.position.z > 10) resetshoot()
-=======
     if( keyboard.pressed('left') ){
         moonMesh.position.x  -= speed * delta;
     }else if( keyboard.pressed('right') ){
@@ -136,7 +129,6 @@
 		shootright.position.z += shootSpeed * delta;
 		if( shootleft.position.z > 20) resetshoot()
 
->>>>>>> 12109027d71bb2fa50291873c97ff988066e5fb7
 		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
 		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
     //	player.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
@@ -185,22 +177,6 @@
     //   moonMesh.position.z = 20;
     //   timeMoon = 0;
     // }
-<<<<<<< HEAD
-    // if(moonMesh.position.z < shootleft.position.z){
-    //   shootleft.position.z = 0;
-    //   shootright.position.z = 0;
-    //   shot+=1
-    //   time = 0;
-    // }
-    // if(shot == 3){
-    //   time = 0;
-    //   timeMoon = 0;
-    //   shot = 0;
-    //   shootleft.position.z = 0;
-    //   shootright.position.z = 0;
-    //   moonMesh.position.z = 20;
-    // }
-=======
 
     if(moonMesh.position.z < shootleft.position.z){
       console.log("asdasds: " +  moonMesh.position.z + " " + shootleft.position.z)
@@ -216,7 +192,6 @@
       resetMoon()
     }
 
->>>>>>> 12109027d71bb2fa50291873c97ff988066e5fb7
     // if(time == 100){
     //   time = 0;
     //   shootleft.position.z = 0;
