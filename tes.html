@@ -36,7 +36,6 @@
     var container;
     var camera, scene, raycaster, renderer;
     var shoot;
-    var plasmaBall;
     var room;
     var isMouseDown = false;
 
@@ -67,10 +66,6 @@
       );
       crosshair.position.z = - 2;
       camera.add(crosshair);
-      plasmaBall = new THREE.Mesh(new THREE.SphereGeometry(5, 32, 32), new THREE.MeshBasicMaterial({
-        color:  0xffff00
-      }));
-      scene.add(plasmaBall)
 
       var texture = new THREE.TextureLoader().load('assets/galaxy_starfield.png')
 
@@ -240,11 +235,27 @@
           INTERSECTED = intersects[0].object;
           INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
           INTERSECTED.material.emissive.setHex(0xff0000);
-          // if (shoot.position.z == INTERSECTED.position.z) {
+          // console.log(shoot.position)
+          // console.log("dan")
+          // console.log(INTERSECTED.position)
+
+          // if (INTERSECTED.position.z < 0) {
+          //   if (shoot.position.z <= INTERSECTED.position.z) {
+          //     room.remove(INTERSECTED)
+          //     console.log("hancur")
+          //   }
+          // } else {
+          //   if (shoot.position.z >= INTERSECTED.position.z) {
+          //     room.remove(INTERSECTED)
+          //     console.log("hancur")
+          //   }
+          // }
+          // if (shoot.position.z <= -3) {
           //   room.remove(INTERSECTED)
+          //   console.log("hancur")
+
           // }
           room.remove(INTERSECTED)
-
         }
 
       } else {
