@@ -8,7 +8,11 @@
 <script src="lib/WebVR.js"></script>
 <script src="bower_components/threex.planets/threex.planets.js"></script>
 <script src="lib/firstperson.js"></script>
-<body style='margin: 0px; background-color: rgb(139, 138, 138); overflow: hidden;'><script>
+<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+<body style='margin: 0px; background-color: rgb(139, 138, 138); overflow: hidden;'>
+  <div style="float:right;font-family:'Orbitron',sans-serif;" id="score">
+  </div>
+<script>
 
     var renderer	= new THREE.WebGLRenderer();
     //renderer.setPixelRatio(window.devicePixelRatio);
@@ -125,14 +129,14 @@
 		scene.add(object3d)
 	})*/
 
-	
+
 
 	////////////////////////////////////////////////////////////////////
 	//			Kontrol					//
 	///////////////////////////////////////////////////////////////////
 	var keyboard  = new THREEx.KeyboardState();
-	var shootSpeed = 5
-
+	var shootSpeed = 5;
+  var score = 0;
 	onRenderFcts.push(function(delta, now){
 
 		if( player === null )  return;
@@ -143,13 +147,20 @@
 		}else if( keyboard.pressed('up') ){
 		    player.position.y  += speed * delta;
 		}
+    if( keyboard.pressed('left') ){
+        moonMesh.position.x  -= speed * delta;
+    }else if( keyboard.pressed('right') ){
+        moonMesh.position.x  += speed * delta;
+    }
 
-		moonMesh.position.z += -2 * delta;
-		if( moonMesh.position.z < -3 )  resetMoon()
+		// moonMesh.position.z += -2 * delta;
+		if( moonMesh.position.z <= 0 ) {
+      resetMoon();
+    }
 
 		shootleft.position.z += shootSpeed * delta;
 		shootright.position.z += shootSpeed * delta;
-		if( shootleft.position.z > 10) resetshoot()
+		if( shootleft.position.z > 20) resetshoot()
 
 		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
 		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
@@ -161,9 +172,9 @@
 	//				function 						//
 	//////////////////////////////////////////////////////////////////////////////////
 	function resetMoon(){
-	    moonMesh.position.x = 0
-	    moonMesh.position.y = 5 * (Math.random()-0.5)
-	    moonMesh.position.z = 10       
+	    moonMesh.position.y = 0
+	    moonMesh.position.x = 5 * (Math.random()-0.5)
+	    moonMesh.position.z = 20
 	}
 
 	function resetshoot(){
@@ -196,30 +207,36 @@
 	renderer.setAnimationLoop( function () {
     // shootleft.position.z += 0.2;
     // shootright.position.z += 0.2;
-    // moonMesh.position.z -= 0.025;
+    moonMesh.position.z -= 0.025;
     // time += 1;
-    // timeMoon += 1;
+    timeMoon += 1;
+    console.log(timeMoon)
     // // console.log("anu"+ time + " " +shootright.position.z);
-    // if(timeMoon == 800){
-    //   moonMesh.position.z = 20;
-    //   timeMoon = 0;
-    // }
+    if(timeMoon == 800){
+      score = 0;
+      document.getElementById("score").innerHTML = score
+      moonMesh.position.z = 20;
+      timeMoon = 0;
+    }
 
-    // if(moonMesh.position.z < shootleft.position.z){
-    //   shootleft.position.z = 0;
-    //   shootright.position.z = 0;
-    //   shot+=1
-    //   time = 0;
-    // }
+    if(moonMesh.position.z < shootleft.position.z){
+      // console.log("asdasds: " +  moonMesh.position.z + " " + shootleft.position.z)
+      if(shootleft.position.x >= moonMesh.position.x-0.5 && shootright.position.x <= moonMesh.position.x+0.5){
+        resetshoot()
+        score += 10
+        shot+=1
+        document.getElementById("score").innerHTML = score
+      }
+    }
 
-    // if(shot == 3){
-    //   time = 0;
-    //   timeMoon = 0;
-    //   shot = 0;
-    //   shootleft.position.z = 0;
-    //   shootright.position.z = 0;
-    //   moonMesh.position.z = 20;
-    // }
+    if(shot == 3){
+      score += 20
+      document.getElementById("score").innerHTML = score
+      shot = 0
+      timeMoon = 0;
+      resetshoot()
+      resetMoon()
+    }
 
     // if(time == 100){
     //   time = 0;
