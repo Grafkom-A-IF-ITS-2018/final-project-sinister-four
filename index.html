@@ -75,11 +75,6 @@
 
 	var moonMesh  = THREEx.Planets.createMoon()
 	scene.add(moonMesh)
-	function resetMoon(){
-	    moonMesh.position.x = 0
-	    moonMesh.position.y = 5 * (Math.random()-0.5)
-	    moonMesh.position.z = 10       
-	}
 	resetMoon()
 
 
@@ -103,20 +98,20 @@
 	shootright.position.z= 0.3
 	scene.add(shootright)
 
-	var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Left
-	detonation.position.x= 0.5
-	detonation.position.z= 0.1
-	scene.add(detonation)
+	// var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Left
+	// detonation.position.x= 0.5
+	// detonation.position.z= 0.1
+	// scene.add(detonation)
 
-	var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Right
-	detonation.position.x=-0.5
-	detonation.position.z= 0.1
-	scene.add(detonation)
+	// var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Right
+	// detonation.position.x=-0.5
+	// detonation.position.z= 0.1
+	// scene.add(detonation)
 
-	var light	= new THREE.PointLight()
-	detonation.position.x=-0.5
-	detonation.position.z= 0.1
-	scene.add(light)
+	// var light	= new THREE.PointLight()
+	// detonation.position.x=-0.5
+	// detonation.position.z= 0.1
+	// scene.add(light)
 
 	/*THREEx.SpaceShips.loadShuttle01(function(object3d){
 		object3d.position.x	= -1
@@ -136,8 +131,10 @@
 	//			Kontrol					//
 	///////////////////////////////////////////////////////////////////
 	var keyboard  = new THREEx.KeyboardState();
+	var shootSpeed = 5
 
 	onRenderFcts.push(function(delta, now){
+
 		if( player === null )  return;
 
 		var speed = 1;
@@ -150,11 +147,32 @@
 		moonMesh.position.z += -2 * delta;
 		if( moonMesh.position.z < -3 )  resetMoon()
 
+		shootleft.position.z += shootSpeed * delta;
+		shootright.position.z += shootSpeed * delta;
+		if( shootleft.position.z > 10) resetshoot()
+
 		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
 		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
     //	player.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
 		camera.lookAt( scene.position )
 	})
+
+	///////////////////////////////////////////////////////////////////////////////////
+	//				function 						//
+	//////////////////////////////////////////////////////////////////////////////////
+	function resetMoon(){
+	    moonMesh.position.x = 0
+	    moonMesh.position.y = 5 * (Math.random()-0.5)
+	    moonMesh.position.z = 10       
+	}
+
+	function resetshoot(){
+		var y = player.position.y
+	    shootleft.position.y = y
+	    shootleft.position.z = 0
+	    shootright.position.y = y
+	    shootright.position.z = 0
+	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Camera Controls							//
