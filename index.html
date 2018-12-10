@@ -73,27 +73,24 @@
 		scene.add(object3d)
 	})*/
 
-  var moonMesh  = THREEx.Planets.createMoon()
-  moonMesh.position.x = 0
-  moonMesh.position.y = 0
-  moonMesh.position.z = 20
+	var moonMesh  = THREEx.Planets.createMoon()
 	scene.add(moonMesh)
-  // console.log("asdsad")
-  // console.log(apalah)
+	function resetMoon(){
+	    moonMesh.position.x = 0
+	    moonMesh.position.y = 5 * (Math.random()-0.5)
+	    moonMesh.position.z = 10       
+	}
+	resetMoon()
 
+
+	//////////////////////////////////////
+	//		player 			//
+	////////////////////////////////////
     var player	= null
 	new THREEx.SpaceShips.loadSpaceFighter03(function(object3d){
 		scene.add(object3d)
+		//position.z = -5
 		player = object3d
-		// var light	= new THREE.PointLight()
-		// detonation.position.x=-0.5
-		// detonation.position.z= 0.1
-
-		// scene.add(light)
-
-  //   object3d.name = 'anuku'
-  //   scene.add(object3d)
-  //   spaceship = object3d
 	})
 
 	var shootleft	= new THREEx.SpaceShips.Shoot() // Shoot Left
@@ -119,17 +116,7 @@
 	var light	= new THREE.PointLight()
 	detonation.position.x=-0.5
 	detonation.position.z= 0.1
-
 	scene.add(light)
-
-	player = new THREE.Group()
-	player.add(camera)
-	//player.position.y = 0.3
-	// console.log(player.position.y)
-	scene.add(player)
-	//console.log(player)
-
-  scene.add(player)
 
 	/*THREEx.SpaceShips.loadShuttle01(function(object3d){
 		object3d.position.x	= -1
@@ -143,7 +130,7 @@
 		scene.add(object3d)
 	})*/
 
-
+	
 
 	////////////////////////////////////////////////////////////////////
 	//			Kontrol					//
@@ -159,6 +146,14 @@
 		}else if( keyboard.pressed('up') ){
 		    player.position.y  += speed * delta;
 		}
+
+		moonMesh.position.z += -2 * delta;
+		if( moonMesh.position.z < -3 )  resetMoon()
+
+		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
+		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
+    //	player.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
+		camera.lookAt( scene.position )
 	})
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -169,12 +164,6 @@
 		mouse.x	= (event.clientX / window.innerWidth ) - 0.5
 		mouse.y	= (event.clientY / window.innerHeight) - 0.5
 	}, false)
-	onRenderFcts.push(function(delta, now){
-		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
-		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
-    player.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
-		camera.lookAt( scene.position )
-	})
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the scene						//
@@ -187,38 +176,38 @@
   var timeMoon = 0;
   var shot = 0;
 	renderer.setAnimationLoop( function () {
-    shootleft.position.z += 0.2;
-    shootright.position.z += 0.2;
-    moonMesh.position.z -= 0.025;
-    time += 1;
-    timeMoon += 1;
-    // console.log("anu"+ time + " " +shootright.position.z);
-    if(timeMoon == 800){
-      moonMesh.position.z = 20;
-      timeMoon = 0;
-    }
+    // shootleft.position.z += 0.2;
+    // shootright.position.z += 0.2;
+    // moonMesh.position.z -= 0.025;
+    // time += 1;
+    // timeMoon += 1;
+    // // console.log("anu"+ time + " " +shootright.position.z);
+    // if(timeMoon == 800){
+    //   moonMesh.position.z = 20;
+    //   timeMoon = 0;
+    // }
 
-    if(moonMesh.position.z < shootleft.position.z){
-      shootleft.position.z = 0;
-      shootright.position.z = 0;
-      shot+=1
-      time = 0;
-    }
+    // if(moonMesh.position.z < shootleft.position.z){
+    //   shootleft.position.z = 0;
+    //   shootright.position.z = 0;
+    //   shot+=1
+    //   time = 0;
+    // }
 
-    if(shot == 3){
-      time = 0;
-      timeMoon = 0;
-      shot = 0;
-      shootleft.position.z = 0;
-      shootright.position.z = 0;
-      moonMesh.position.z = 20;
-    }
+    // if(shot == 3){
+    //   time = 0;
+    //   timeMoon = 0;
+    //   shot = 0;
+    //   shootleft.position.z = 0;
+    //   shootright.position.z = 0;
+    //   moonMesh.position.z = 20;
+    // }
 
-    if(time == 100){
-      time = 0;
-      shootleft.position.z = 0;
-      shootright.position.z = 0;
-    }
+    // if(time == 100){
+    //   time = 0;
+    //   shootleft.position.z = 0;
+    //   shootright.position.z = 0;
+    // }
 	  renderer.render( scene, camera );
 	} );
 
