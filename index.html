@@ -111,16 +111,18 @@
 	onRenderFcts.push(function(delta, now){
 		if( player === null )  return;
 		var speed = 1;
-		if( keyboard.pressed('down') ){
+		if( keyboard.pressed('S') ){
 		    player.position.y  -= speed * delta;
-		}else if( keyboard.pressed('up') ){
+		}else if( keyboard.pressed('W') ){
 		    player.position.y  += speed * delta;
 		}
-    if( keyboard.pressed('left') ){
-        moonMesh.position.x  -= speed * delta;
-    }else if( keyboard.pressed('right') ){
+		//console.log(player.position.y)
+    if( keyboard.pressed('A') ){
         moonMesh.position.x  += speed * delta;
-    }
+    }else if( keyboard.pressed('D') ){
+        moonMesh.position.x  -= speed * delta;
+	}
+	console.log(player.position.x)
 
 		// moonMesh.position.z += -2 * delta;
 		if( moonMesh.position.z <= 0 )  resetMoon()
@@ -138,8 +140,8 @@
 	//				function 						//
 	//////////////////////////////////////////////////////////////////////////////////
 	function resetMoon(){
-	    moonMesh.position.y = 0
-	    moonMesh.position.x = 5 * (Math.random()-0.5)
+	    moonMesh.position.y = 5 * (Math.random()-0.5)
+	    moonMesh.position.x = 0
 	    moonMesh.position.z = 20
 	}
 	function resetshoot(){
