@@ -4,6 +4,7 @@
 <script src='lib/OBJLoader.js'></script>
 <script src='lib/MTLLoader.js'></script>
 <script src='threex.spaceships.js'></script>
+<script src='threex.KeyboardState.js'></script>
 <script src="lib/WebVR.js"></script>
 <script src="bower_components/threex.planets/threex.planets.js"></script>
 <script src="lib/firstperson.js"></script>
@@ -80,38 +81,19 @@
   // console.log("asdsad")
   // console.log(apalah)
 
-	var player = new THREEx.SpaceShips.loadSpaceFighter03(function(object3d){
-        var spaceship	= object3d
-		    scene.add(spaceship)
-		/*var shoot	= new THREEx.SpaceShips.Shoot() // Shoot Left
-		shoot.position.x= 0.5
-		shoot.position.z= 0.3
-		scene.add(shoot)
+    var player	= null
+	new THREEx.SpaceShips.loadSpaceFighter03(function(object3d){
+		scene.add(object3d)
+		player = object3d
+		// var light	= new THREE.PointLight()
+		// detonation.position.x=-0.5
+		// detonation.position.z= 0.1
 
-		var shoot	= new THREEx.SpaceShips.Shoot() // Shoot Right
-		shoot.position.x=-0.5
-		shoot.position.z= 0.3
-		scene.add(shoot)*/
+		// scene.add(light)
 
-		var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Left
-		detonation.position.x= 0.5
-		detonation.position.z= 0.1
-		scene.add(detonation)
-
-		var detonation	= new THREEx.SpaceShips.Detonation() //Detonate Right
-		detonation.position.x=-0.5
-		detonation.position.z= 0.1
-		scene.add(detonation)
-
-		var light	= new THREE.PointLight()
-		detonation.position.x=-0.5
-		detonation.position.z= 0.1
-
-		scene.add(light)
-
-    object3d.name = 'anuku'
-    var spaceship	= object3d
-    scene.add(spaceship)
+  //   object3d.name = 'anuku'
+  //   scene.add(object3d)
+  //   spaceship = object3d
 	})
 
 	var shootleft	= new THREEx.SpaceShips.Shoot() // Shoot Left
@@ -161,6 +143,23 @@
 		scene.add(object3d)
 	})*/
 
+
+
+	////////////////////////////////////////////////////////////////////
+	//			Kontrol					//
+	///////////////////////////////////////////////////////////////////
+	var keyboard  = new THREEx.KeyboardState();
+
+	onRenderFcts.push(function(delta, now){
+		if( player === null )  return;
+
+		var speed = 1;
+		if( keyboard.pressed('down') ){
+		    player.position.y  -= speed * delta;
+		}else if( keyboard.pressed('up') ){
+		    player.position.y  += speed * delta;
+		}
+	})
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Camera Controls							//
